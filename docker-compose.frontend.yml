@@ -1,0 +1,12 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    env_file:
+      - path: .env
+        required: false
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    volumes:
+      - ./frontend:/app/frontend

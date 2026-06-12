@@ -1,0 +1,89 @@
+TEMPLATE ENTERPRISE PARA CODEX - V3 CLEAN ZABBIX METRICS
+
+OBJETIVO
+Este pacote cria uma base de governança para projetos no Codex.
+
+Esta versão foi ajustada para o padrão:
+
+A própria API publica `/metrics`.
+O Zabbix consome `/metrics`.
+
+Prometheus não é obrigatório.
+
+FONTES ÚNICAS
+
+- SUPERPOWERS.md: regras de uso do Superpowers
+- IMPECCABLE_UI.md: regras de UX/UI Impeccable
+- STACK.md: tecnologias oficiais do projeto
+- UI_COMPONENTS.md: componentes reutilizáveis
+- MONITORING.md: monitoramento com API publicando /metrics
+- OBSERVABILITY_FIRST.md: observabilidade obrigatória por funcionalidade
+
+COMO USAR
+
+1. Extraia este ZIP.
+2. Copie todos os arquivos para a raiz do novo projeto.
+3. Edite os arquivos específicos do projeto.
+4. Em DEV, mantenha um único `.env` organizado por blocos.
+5. Em produção separada por stack, crie em cada servidor apenas o `.env` daquela stack.
+6. Abra o repositório no Codex.
+7. Execute:
+
+prompts/START_PROJECT.md
+
+ARQUIVOS QUE VOCÊ NORMALMENTE VAI ALTERAR
+
+1. PRODUCT.md
+2. ROADMAP.md
+3. STACK.md, se mudar tecnologia
+4. DESIGN.md, se mudar identidade visual
+5. DEVOPS.md, se mudar deploy
+
+MONITORAMENTO
+
+A API deve expor:
+
+- /health
+- /ready
+- /metrics
+
+O Zabbix deve consumir /metrics via:
+
+- HTTP Agent
+- Web scenario
+- Item dependente
+- JSONPath ou preprocessing
+
+Formato recomendado para /metrics:
+
+JSON.
+
+Exemplo:
+
+{
+  "service": "nome-do-servico",
+  "uptime_seconds": 3600,
+  "requests_total": 12500,
+  "request_errors_total": 12,
+  "request_duration_avg_ms": 85,
+  "database_status": 1,
+  "database_latency_ms": 7
+}
+
+FLUXO RECOMENDADO
+
+1. Editar PRODUCT.md
+2. Editar ROADMAP.md
+3. Ajustar STACK.md se necessário
+4. Ajustar DESIGN.md se necessário
+5. Separar `backend`, `frontend`, `worker` e `db` em arquivos de compose independentes
+6. Em DEV, usar um único `.env` por blocos; em produção separada, usar `.env` por stack
+7. Habilitar logs nos containers para facilitar debug
+8. Rodar prompts/START_PROJECT.md
+9. Aprovar plano
+10. Implementar módulo com prompts/CREATE_FEATURE.md
+11. Revisar com prompts/SUPERPOWERS_REVIEW.md
+12. Melhorar UI com prompts/IMPROVE_UI.md
+13. Revisar UI com prompts/IMPECCABLE_REVIEW.md
+14. Revisar observabilidade com prompts/OBSERVABILITY_REVIEW.md
+15. Preparar release com prompts/RELEASE.md

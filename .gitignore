@@ -1,0 +1,15 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+node_modules/
+generated_reports/
+backend/generated_reports/
+backend/*.db
+*.sqlite
+*.sqlite3
